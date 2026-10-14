@@ -65,7 +65,7 @@ def get_user_settings_dir(install_dir: Path, dev: bool) -> Path:
     # Check for application.settingsdir in launch.properties
     for launch_prop in get_launch_properties(install_dir, dev):
         if launch_prop.startswith('VMARGS=-Dapplication.settingsdir='):
-            application_settingsdir = launch_prop[launch_prop.rindex('=')+1:]
+            application_settingsdir = launch_prop.split('=', 2)[2]
             if application_settingsdir:
                 return Path(application_settingsdir) / app_name / versioned_name
     
